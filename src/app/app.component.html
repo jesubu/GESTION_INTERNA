@@ -1,0 +1,167 @@
+    
+<div class="header">
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">{{title}}</a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li>
+						<a [routerLink]="['/inicio']"  [routerLinkActive]="['activo']">Inicio</a>
+					</li>
+					<li *ngIf="identity"> 
+						<a  [routerLink]="['/solicitudes-list']"  [routerLinkActive]="['activo']">Tickets</a>
+					</li>
+				
+					<li class="dropdown" *ngIf="identity && identity.role=='ROLE_ADMIN'">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Tablas Maestras                                                 
+							<b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a [routerLink]="['/modulos-list']"  [routerLinkActive]="['activo']">Proyectos
+									<i class="fa fa-cloud-upload" aria-hidden="true"></i>
+								</a>
+							</li>
+							<li>
+								<a [routerLink]="['/sedes-list']"  [routerLinkActive]="['activo']">Sedes</a>
+							</li>
+							<li>
+									
+								<a [routerLink]="['/tipos-list']"  [routerLinkActive]="['activo']">Categoría
+									<!--i class="fa fa-rocket fa-pull-left"></i>-->
+									
+								</a>
+							</li>	
+							<li>
+								<a [routerLink]="['/importancia-list']"  [routerLinkActive]="['activo']">Importancias</a>
+							</li>
+							<li>
+								<a [routerLink]="['/estados-list']"  [routerLinkActive]="['activo']">Estados</a>
+							</li>
+							<!--													
+							<li class="divider"></li>
+							<li>
+								<a href="#">Separated link</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a href="#">One more separated link</a>
+							</li>
+						-->
+						</ul>
+					</li>
+					<li>
+						<a [routerLink]="['/acercade']"  [routerLinkActive]="['activo']">{{ 'About' | translate }}</a>
+					</li> 
+					<li class="dropdown" >
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Idiomas                                                 
+							<b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu">
+								<li>
+							<button *ngFor="let lang of supportedLangs"
+							(click)="selectLang(lang.value)"
+							class="btn btn-default" [class.btn-primary]="isCurrentLang(lang.value)">
+							{{ lang.display }}
+							</button>
+						</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right  padding-right-20" *ngIf="identity">
+					<li class="navbar-right dropdown "><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<span class="user-avatar pull-left" style="margin-right:8px; margin-top:-5px;">
+								<img *ngIf="identity.image && identity.image!='null'"  
+								src="{{url+'get-image-file/'+identity.image}}" class="img-responsive img-circle" title="John Doe" alt="John Doe" width="30px" height="30px">
+							</span>
+							<span class="user-name">
+								{{identity.nombre}} {{" "}} {{identity.apellidos}}
+							</span>
+							<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li>
+									<div class="navbar-content">
+										<div class="row">
+											<div class="col-md-5">
+												<img *ngIf="identity.image && identity.image!='null'" 
+												src="{{url+'get-image-file/'+identity.image}}"
+												alt="Alternate Text" 
+												class="img-responsive" width="120px" height="120px" />
+												<p class="text-center small">
+														<span class="btn btn-primary btn-file">
+															Subir Imagen<input for="file-upload" accept="image/*" type="file" (change)="fileChangeEvent($event)"/>
+														</span>												
+												</p>
+											</div>
+											<div class="col-md-7">
+												<span>{{identity.nombre}} {{" "}} {{identity.apellidos}}</span>
+												<p class="text-muted small">
+														{{identity.email}}</p>
+												<div class="divider">
+												</div>
+												<a href="./56ExR" class="btn btn-default btn-xs"><i class="fa fa-user-o" aria-hidden="true"></i> Mi Perfil</a>
+											</div>
+										</div>
+									</div>
+									<div class="navbar-footer">
+										<div class="navbar-footer-content">
+											<div class="row">
+												<div class="col-md-6">
+													<a href="#" class="btn btn-default btn-sm"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Cambiar Passowrd</a>
+												</div>
+												<div class="col-md-6">
+													<a href="#" class="btn btn-default btn-sm pull-right" (click)="logout()"><i class="fa fa-power-off" aria-hidden="true"></i> Salir</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</li>
+
+					</ul>
+
+				<ul class="nav navbar-nav navbar-right" *ngIf="!identity">
+					<!--<li><p class="navbar-text">Already have an account?</p></li>-->
+					<li class="dropdown">
+					  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+						<ul id="login-dp" class="dropdown-menu">
+							<li>
+								 <div class="row">
+										<div class="col-md-12">
+											<app-login></app-login>
+										</div>
+								 </div>
+							</li>
+						</ul>
+					</li>
+				  </ul>
+
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+</div>
+<div class="container">
+	
+	<router-outlet></router-outlet>
+</div>
+<hr />
+<div class="footer">
+	<div class="container">
+		<p>
+			<span class="glyphicon glyphicon-flash ft"></span> &copy; 2017 - Mi aplicación
+		</p>
+	</div>
+</div>

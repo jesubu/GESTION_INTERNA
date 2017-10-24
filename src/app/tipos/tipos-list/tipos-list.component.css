@@ -1,0 +1,10 @@
+.optionsTable{
+    width: 100px;
+    padding-left: 45px;
+}
+.block {
+    display: block !important;
+    overflow: hidden !important;
+    -webkit-transition: height .5s;
+    transition: height .5s;
+  }

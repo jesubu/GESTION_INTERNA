@@ -1,0 +1,21 @@
+<div class="side-form">
+  <h1>{{title}}</h1>
+  <div class="form-container">
+    <form #formImportancia="ngForm" (ngSubmit)="onSubmit();formImportancia.reset()">
+      <div class="form-group">
+        <label for="name">Nombre
+                                <span  class="required">*</span>
+                            </label>
+        <input type="text" class="form-control input-sm" name="nombre" #nombre="ngModel" [(ngModel)]="importancia.nombre" required>
+      </div>
+      <div class="form-group">
+        <label for="name">Color</label>
+        <input type="text" class="form-control input-sm" name="color" #color="ngModel" [(ngModel)]="importancia.color">
+      </div>
+      <div class="form-group">
+        <a class="btn btn-default" routerLink="/importancia-list">Cancelar</a>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>

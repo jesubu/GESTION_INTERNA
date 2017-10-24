@@ -1,0 +1,13 @@
+
+    .side-form {
+        position: absolute;
+        z-index: 100;
+        top: 45px;
+        right: 0;
+        width: 85%;
+        height: 100%;
+        overflow: auto;
+        background: #fff;
+        padding: 20px;
+        border-left: 1px solid #e0e0e0;
+    }

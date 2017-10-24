@@ -1,0 +1,24 @@
+<form #formCoche="ngForm" (ngSubmit)="onSubmit();formCoche.reset()">
+  <modal-body>
+
+    <div class="panel-body">
+      <div class="col-md-12 col-sm-12">
+        <div class="form-group col-md-6 col-sm-6">
+          <label for="name">Nombre
+						<span  class="required">*</span>
+					</label>
+          <input type="text" class="form-control input-sm" name="nombre" #nombre="ngModel" [(ngModel)]="modulo.nombre" required>
+
+        </div>
+        <div class="form-group col-md-6 col-sm-6">
+          <label for="name">Descripción	</label>
+          <input type="text" class="form-control input-sm" name="descripcion" #descripcion="ngModel" [(ngModel)]="modulo.descripcion">
+        </div>
+      </div>
+    </div>
+  </modal-body>
+  <modal-footer>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+    <button type="button" class="btn btn-primary" value="Guardar" [disabled]="!formCoche.form.valid" (click)="someMethod($event)">Guardar</button>
+  </modal-footer>
+</form>

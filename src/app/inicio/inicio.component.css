@@ -1,0 +1,24 @@
+/*Media object*/
+.media 
+{
+  padding-top: 40px;
+}
+.media a:hover, .media a:focus
+{
+  text-decoration: none;
+  outline: none;
+}
+.media .media-left .icon 
+{
+  display: block;
+  width: 80px;
+  height: 80px;
+  padding: 16px 6px;
+  color: #f0f0f0;
+  text-align: center;
+  border-radius: 50%;
+}
+.media .media-left .icon::before
+{
+  font-size: 44px;
+}

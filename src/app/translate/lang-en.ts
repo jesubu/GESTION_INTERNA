@@ -8,3 +8,4 @@ export const LANG_EN_TRANS = {
     'List':'List',
     'Add Module':'Add Module'
 };
+

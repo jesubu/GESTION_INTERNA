@@ -30,9 +30,11 @@ export class AppComponent implements OnInit,DoCheck {
     ngDoCheck(){
       this.identity=this._userService.getIdentity();
       //console.log(this.identity.image);
+      if (this.identity!=null){
       if (this.identity.image=="" || this.identity.image==null){
         this.identity.image="0eSOeXRyYel0oVMP33rCSzJQ.png";
       }
+    }
       //this.identity.image=this.url+'uploads/users/'+ this.identity.image;
       
     }
@@ -63,6 +65,7 @@ export class AppComponent implements OnInit,DoCheck {
       this.translatedText = this._translate.instant('hello world');
     }
 
+    
     logout(){
       localStorage.clear();
       this.identity=null;

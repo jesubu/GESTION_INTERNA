@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ModuloService } from "../../services/modulo.service";
-import { Modulo } from "../../models/modulo";
+import { Modulo } from '../../models/modulo';
 import { TicketService } from '../../services/ticket.service';
 import { Ticket } from '../../models/ticket';
 import { SedeService } from '../../services/sede.service';
@@ -21,8 +21,8 @@ import { NotificationService } from 'ng2-notify-popup';
   selector: 'app-add-incidencia',
   templateUrl: './add-incidencia.component.html', animations: [slideInOutAnimation],
   host: { '[@slideInOutAnimation]': '' },
-  styleUrls: ['./add-incidencia.component.css'], 
-  providers: [NotificationService,ModuloService,SedeService,EstadoService,ImportanciaService,TipoService]
+  styleUrls: ['./add-incidencia.component.css'],
+  providers: [NotificationService,ModuloService, SedeService, EstadoService, ImportanciaService,TipoService]
 })
 export class AddIncidenciaComponent implements OnInit {
   public sItem:string;

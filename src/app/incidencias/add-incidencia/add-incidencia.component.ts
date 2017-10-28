@@ -32,7 +32,7 @@ export class AddIncidenciaComponent implements OnInit {
   public oColEstados: Estado[];
   public oColImportancias: Importancia[];
   public oColTipos: Tipo[];
-  
+
   constructor(private _ticketService: TicketService,private route: ActivatedRoute,
     private router: Router, private notify: NotificationService,
     private _moduloService: ModuloService,private _sedeService: SedeService,private _estadoService: EstadoService,
@@ -62,21 +62,26 @@ export class AddIncidenciaComponent implements OnInit {
   }
 
 cargaCombos(){
+console.log('modulos ini');
 
   this._moduloService.getModulos().subscribe(
     result => {
       this.oColModulos = result.modulos;
+      console.log('modulos on');
     },
     error => {
       var errorMsg = <any>error;
       console.error(errorMsg);
     }
   );
+  console.log('modulos fin');
 
+  console.log('sedes ini');
   this._sedeService.getSedes().subscribe(
     result => {
 
       this.oColSedes = result.sedes;
+      console.log('sedes on');
     },
     error => {
       var errorMsg = <any>error;
@@ -84,7 +89,7 @@ cargaCombos(){
 
     }
   );
-
+  console.log('sedes fin');
   this._estadoService.getEstados().subscribe(
     result => {
       this.oColEstados = result.estados;

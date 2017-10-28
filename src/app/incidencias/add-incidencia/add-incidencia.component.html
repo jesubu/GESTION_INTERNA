@@ -25,7 +25,7 @@
                 <div class="form-group">
                     <label for="name">Tipo</label>
                     <select class="form-control" name="tipo" #tipo="ngModel" [(ngModel)]="oTicket.tipo"  >
-                        <option selected="selected" disabled [value]="0">[-Seleccione una opción-]</option>
+                        <option selected="selected" disabled [value]="'null'">[-Seleccione una opción-]</option>
                         <option *ngFor="let tipo of oColTipos" [value]="tipo._id">
                             {{tipo.tipo}}
                         </option>
@@ -40,7 +40,7 @@
                 <div class="form-group">
                     <label for="name">Módulo</label>
                     <select class="form-control" name="modulo" #modulo="ngModel" [(ngModel)]="oTicket.modulo"  >
-                        <option selected="selected" disabled [value]="0">[-Seleccione una opción-]</option>
+                        <option selected="selected" disabled [value]="'null'">[-Seleccione una opción-]</option>
                         <option *ngFor="let modulo of oColModulos" [value]="modulo._id">
                             {{modulo.nombre}}
                         </option>
@@ -51,7 +51,7 @@
                   <div class="form-group">
                       <label for="name">Sede</label>
                       <select class="form-control" name="sede" #sede="ngModel" [(ngModel)]="oTicket.sede"  >
-                          <option selected="selected" disabled [value]="0">[-Seleccione una opción-]</option>
+                          <option selected="selected" disabled [value]="'null'">[-Seleccione una opción-]</option>
                           <option *ngFor="let sede of oColSedes" [value]="sede._id">
                               {{sede.nombre}}
                           </option>
@@ -62,7 +62,7 @@
                     <div class="form-group">
                         <label for="name">Estado</label>
                         <select class="form-control" name="estado" #estado="ngModel" [(ngModel)]="oTicket.estado"  >
-                            <option selected="selected" disabled [value]="0">[-Seleccione una opción-]</option>
+                            <option selected="selected" disabled [value]="'null'">[-Seleccione una opción-]</option>
                             <option *ngFor="let estado of oColEstados" [value]="estado._id">
                                 {{estado.nombre}}
                             </option>
@@ -73,7 +73,7 @@
                       <div class="form-group">
                           <label for="name">Importancia</label>
                           <select class="form-control" name="importancia" #importancia="ngModel" [(ngModel)]="oTicket.importancia"  >
-                              <option selected="selected" disabled [value]="0">[-Seleccione una opción-]</option>
+                              <option selected="selected" disabled [value]="'null'">[-Seleccione una opción-]</option>
                               <option *ngFor="let importancia of oColImportancias" [value]="importancia._id">
                                   {{importancia.nombre}}
                               </option>

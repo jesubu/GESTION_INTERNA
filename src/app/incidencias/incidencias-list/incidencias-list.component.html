@@ -31,7 +31,7 @@
           <tr *ngFor="let ticket of oColTickets | searchFilter: 'titulo,descripcion' : txtBuscar.value">
             <td>
               <div class="media" (click)="editar(ticket._id)">
-                <a href="#" class="pull-left" [ngSwitch]="ticket.modulo.nombre" >
+                <a href="javascript:void(0)" class="pull-left" [ngSwitch]="ticket.modulo.nombre" >
                   <img *ngSwitchCase="'SIL'" src="https://icon-icons.com/icons2/539/PNG/512/lab-flask-leaf_icon-icons.com_53021.png" class="media-photo">
                   <img *ngSwitchCase="'Besafer'" src="https://lh3.ggpht.com/yfhuCC3BGYMsnjczLP9Q2tTkOstmwA0pHPONzZ9pCbsmQ7v211kHNRIw2h1NRb0wpA=w300"
                     class="media-photo">
@@ -41,128 +41,22 @@
                   <span class="media-meta pull-right">{{ticket.fechaSolicitud | date: 'dd/MM/yyyy'}}</span>
                   <h4 class="title">
                     {{ticket.titulo}}
-                    <span class="pull-right" [ngStyle]="{'color':ticket.importancia.color}">{{ticket.estado.nombre}}</span>
+                    <span class="pull-right" [ngStyle]="{'color':ticket.importancia.color}">{{ticket.importancia.nombre}}</span>
+                    <span class="pull-right" [ngStyle]="{'color':ticket.estado.color}">{{ticket.estado.nombre}}</span>
+                   
                   </h4>
 
                   <p class="summary">{{ticket.descripcion | slice:0:40 }} ...</p>
                 </div>
-              </div>
+							</div>
+							<div class="btnremove pull-right">
+								<a class="btn btn-danger" (click)="eliminar(ticket._id)">
+									<em class="fa fa-trash"></em>
+								</a>
+							</div>
+
             </td>
           </tr>
-          <!--
-									<tr data-status="pendiente">
-										<td>
-											<div class="ckbox">
-												<input type="checkbox" id="checkbox3">
-												<label for="checkbox3"></label>
-											</div>
-										</td>
-										<td>
-											<a href="javascript:;" class="star">
-												<i class="glyphicon glyphicon-star"></i>
-											</a>
-										</td>
-										<td>
-											<div class="media">
-												<a href="#" class="pull-left">
-													<img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
-												</a>
-												<div >
-													<span class="media-meta pull-right">Febrero 13, 2016</span>
-													<h4 class="title">
-														Lorem Impsum
-														<span class="pull-right pendiente">(Pendiente)</span>
-													</h4>
-													<p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr data-status="cancelado">
-										<td>
-											<div class="ckbox">
-												<input type="checkbox" id="checkbox2">
-												<label for="checkbox2"></label>
-											</div>
-										</td>
-										<td>
-											<a href="javascript:;" class="star">
-												<i class="glyphicon glyphicon-star"></i>
-											</a>
-										</td>
-										<td>
-											<div class="media">
-												<a href="#" class="pull-left">
-													<img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
-												</a>
-												<div >
-													<span class="media-meta pull-right">Febrero 13, 2016</span>
-													<h4 class="title">
-														Lorem Impsum
-														<span class="pull-right cancelado">(Cancelado)</span>
-													</h4>
-													<p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr data-status="pagado" class="selected">
-										<td>
-											<div class="ckbox">
-												<input type="checkbox" id="checkbox4" checked>
-												<label for="checkbox4"></label>
-											</div>
-										</td>
-										<td>
-											<a href="javascript:;" class="star star-checked">
-												<i class="glyphicon glyphicon-star"></i>
-											</a>
-										</td>
-										<td>
-											<div class="media">
-												<a href="#" class="pull-left">
-													<img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
-												</a>
-												<div >
-													<span class="media-meta pull-right">Febrero 13, 2016</span>
-													<h4 class="title">
-														Lorem Impsum
-														<span class="pull-right pagado">(Pagado)</span>
-													</h4>
-													<p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr data-status="pendiente">
-										<td>
-											<div class="ckbox">
-												<input type="checkbox" id="checkbox5">
-												<label for="checkbox5"></label>
-											</div>
-										</td>
-										<td>
-											<a href="javascript:;" class="star">
-												<i class="glyphicon glyphicon-star"></i>
-											</a>
-										</td>
-										<td>
-											<div class="media">
-												<a href="#" class="pull-left">
-													<img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
-												</a>
-												<div >
-													<span class="media-meta pull-right">Febrero 13, 2016</span>
-													<h4 class="title">
-														Lorem Impsum
-														<span class="pull-right pendiente">(Pendiente)</span>
-													</h4>
-													<p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
-												</div>
-											</div>
-										</td>
-									</tr>
-								-->
         </tbody>
       </table>
     </div>
@@ -171,3 +65,15 @@
 <div class="view-side-form">
   <router-outlet></router-outlet>
 </div>
+<modal #modalConfirm>
+  <modal-header [show-close]="true">
+      <h4 class="modal-title">Confirmación</h4>
+  </modal-header>
+  <modal-body>
+      ¿Atención está seguro de eliminar el registro seleccionado?
+  </modal-body>
+  <modal-footer>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+    <button type="button" class="btn btn-primary" value="Aceptar" data-dismiss="modal" (click)="okEliminar()">Aceptar</button>
+  </modal-footer>
+</modal>

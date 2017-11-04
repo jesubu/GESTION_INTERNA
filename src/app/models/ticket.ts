@@ -27,7 +27,11 @@ export class Ticket {
     public sede: Sede,
     public estado: Estado,
     public importancia: Importancia,
-    public tipo: Tipo
+    public tipo: Tipo,
+    public procede: boolean,
+    public fechaResolucion: Date,
+    public tiempoDedicado: number,
+    public resolucion: string
   ) {
 
   }

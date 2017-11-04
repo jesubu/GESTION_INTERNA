@@ -15,6 +15,7 @@ import { Estado } from "../../models/estado";
 import * as _ from "lodash";
 import { AddIncidenciaComponent } from "app/incidencias/add-incidencia/add-incidencia.component";
 
+
 @Component({
   selector: "app-incidencias-list",
   templateUrl: "./incidencias-list.component.html",
@@ -55,6 +56,9 @@ export class IncidenciasListComponent implements OnInit {
     this.renderer.setElementStyle(el, "height", height + "px");
   }
 
+  show(text: string, typ: string): void {
+    this.notify.show(text, { position: 'bottom', duration: '2000', type: typ });
+  }
   ngOnInit() {
     console.log("init");
     this.cargaEstados();
@@ -72,17 +76,7 @@ export class IncidenciasListComponent implements OnInit {
       .mergeMap(_route => _route.data)
       .subscribe(event => this.cargaListado());
 
-    this.oEdicion = new Ticket(
-      "",
-      "",
-      "",
-      new Date(),
-      null,
-      null,
-      null,
-      null,
-      null
-    );
+    this.oEdicion = new Ticket("","", "", new Date(), null,  null, null, null, null,null,null,null,"");
     this.cargaListado();
   }
   newTicket() {
@@ -105,10 +99,6 @@ export class IncidenciasListComponent implements OnInit {
 
     //console.log(this.oColTickets);
   }
-  // to append in body
-  show(text: string, typ: string): void {
-    this.notify.show(text, { position: "bottom", duration: "2000", type: typ });
-  }
 
   cargaEstados() {
     this._estadoService.getEstados().subscribe(
@@ -126,8 +116,9 @@ export class IncidenciasListComponent implements OnInit {
     //this._estadoService.oEdicion=null;
     //console.log(this._estadoService.reload);
     //recargamos el listado
-    console.log("listado ini ");
+    //debugger;
     if (this._ticketService.reload == true) {
+      this.oColTicketsTodos = null;
       this._ticketService.getTickets().subscribe(
         result => {
           //debugger;
@@ -148,6 +139,7 @@ export class IncidenciasListComponent implements OnInit {
       );
     }
   }
+
 
   editar(id) {
     console.log(id);
@@ -174,4 +166,40 @@ export class IncidenciasListComponent implements OnInit {
       }
     );
   }
+
+  eliminar(id) {
+    debugger;
+    this._ticketService.idSel=id;
+    this.modalConfirm.open();
+  }
+
+  okEliminar() {
+    //this.msgOK = this._translate.instant('El módulo se ha eliminado correctamente.');
+    debugger;
+    this._ticketService.removeTicket(this._ticketService.idSel).subscribe(
+      result => {
+        //debugger;
+        //this.sede=result.sede;
+        if (result.status == 200) {
+          this.show("El Ticket se ha eliminado correctamente.", 'success');
+          this.cargaListado();
+        } else {
+          if (!result.sede) {
+            this.show("Error:" + result.message, 'error');
+          }
+          else {
+            this.show("Error:" + result.message, 'error');
+          }
+        }
+      },
+      error => {
+        var errorMsg = <any>error;
+        this.show("Error:" + errorMsg, 'error');
+        console.error(errorMsg);
+      }
+    );
+    this._ticketService.reload = true;
+
+  }
+
 }

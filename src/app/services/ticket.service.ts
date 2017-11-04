@@ -35,24 +35,25 @@ export class TicketService {
                       .map(res=>res.json());
   }
 
-/*
+
 
   addTicket(ticket:Ticket){
-    
+    debugger;
     let json=JSON.stringify(ticket);
     let params=json;
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    return this._http.post(this.url+'ticket',params,options)
+    return this._http.post(this.url+'solicitud',params,options)
                       .map(res=>res.json());
   }
+
 
   updateTicket(ticket:Ticket){
     let json=JSON.stringify(ticket);
     let params=json;
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    return this._http.put(this.url+'ticket/'+ticket._id,params,options)
+    return this._http.put(this.url+'solicitud/'+ticket._id,params,options)
                       .map(res=>res.json());
   }
 
@@ -60,9 +61,10 @@ export class TicketService {
 
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    return this._http.delete(this.url+'ticket/'+id)
+    return this._http.delete(this.url+'solicitud/'+id)
                       .map(res=>res.json());
   }
 
-*/
+  
+
 }

@@ -18,20 +18,29 @@
             <div class="col-md-3">
             <div class="form-group">
                 <label for="name">Fecha</label>
-                <input class="form-control" [ngModel]="oTicket.fechaSolicitud | date:'yyyy-MM-dd'" (ngModelChange)="oTicket.fechaSolicitud = $event" type="date" name="oTicket.fechaSolicitud"/> 
+                <input class="form-control" [ngModel]="oTicket.fechaSolicitud | date:'yyyy-MM-dd'" (ngModelChange)="oTicket.fechaSolicitud = $event" 
+                type="date" name="oTicket.fechaSolicitud" required/> 
               </div> 
             </div> 
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="name">Tipo</label>
-                    <select class="form-control" name="tipo" #tipo="ngModel" [(ngModel)]="oTicket.tipo"  >
+                    <select class="form-control" name="tipo" #tipo="ngModel" [(ngModel)]="oTicket.tipo"  required>
                         <option selected="selected" disabled [value]="'null'">[-Seleccione una opción-]</option>
                         <option *ngFor="let tipo of oColTipos" [value]="tipo._id">
                             {{tipo.tipo}}
+
                         </option>
                       </select>
                   </div> 
                 </div> 
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="name">Procede</label><br>
+                        <input class="radio-inline" type="radio" name="procede" [value]="true" [(ngModel)]="oTicket.procede"> Sí
+                        <input class="radio-inline" type="radio" value="female" name="gender" ngModel> No
+                      </div> 
+                    </div> 
 
                          
           </div>
@@ -39,7 +48,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="name">Módulo</label>
-                    <select class="form-control" name="modulo" #modulo="ngModel" [(ngModel)]="oTicket.modulo"  >
+                    <select class="form-control" name="modulo" #modulo="ngModel" [(ngModel)]="oTicket.modulo"  required>
                         <option selected="selected" disabled [value]="'null'">[-Seleccione una opción-]</option>
                         <option *ngFor="let modulo of oColModulos" [value]="modulo._id">
                             {{modulo.nombre}}
@@ -50,7 +59,7 @@
               <div class="col-md-3">
                   <div class="form-group">
                       <label for="name">Sede</label>
-                      <select class="form-control" name="sede" #sede="ngModel" [(ngModel)]="oTicket.sede"  >
+                      <select class="form-control" name="sede" #sede="ngModel" [(ngModel)]="oTicket.sede"  required>
                           <option selected="selected" disabled [value]="'null'">[-Seleccione una opción-]</option>
                           <option *ngFor="let sede of oColSedes" [value]="sede._id">
                               {{sede.nombre}}
@@ -61,7 +70,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="name">Estado</label>
-                        <select class="form-control" name="estado" #estado="ngModel" [(ngModel)]="oTicket.estado"  >
+                        <select class="form-control" name="estado" #estado="ngModel" [(ngModel)]="oTicket.estado"  required>
                             <option selected="selected" disabled [value]="'null'">[-Seleccione una opción-]</option>
                             <option *ngFor="let estado of oColEstados" [value]="estado._id">
                                 {{estado.nombre}}
@@ -72,7 +81,7 @@
                   <div class="col-md-3">
                       <div class="form-group">
                           <label for="name">Importancia</label>
-                          <select class="form-control" name="importancia" #importancia="ngModel" [(ngModel)]="oTicket.importancia"  >
+                          <select class="form-control" name="importancia" #importancia="ngModel" [(ngModel)]="oTicket.importancia"  required>
                               <option selected="selected" disabled [value]="'null'">[-Seleccione una opción-]</option>
                               <option *ngFor="let importancia of oColImportancias" [value]="importancia._id">
                                   {{importancia.nombre}}
@@ -84,21 +93,38 @@
           <div class="form-group">
             <label for="name">Descipcion</label>
             <textarea type="text" name="descripcion" #descripcion="ngModel" [(ngModel)]="oTicket.descripcion" class="form-control" wrap='off'
-              rows="8" cols="200"></textarea>
+              rows="5" cols="200"></textarea>
           </div>
  
  
 
- 
- 
+ <hr>
+ <h2>Resolución</h2>
+ <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                    <label for="name">Fecha Resolución:</label>
+                    <input class="form-control" [ngModel]="oTicket.fechaResolucion | date:'yyyy-MM-dd'" (ngModelChange)="oTicket.fechaResolucion = $event" 
+                    type="date" name="oTicket.fechaResolucion"/>     
+              </div> 
+          </div>      
+          <div class="col-md-3">
+              <div class="form-group">
+                  <label for="name">Tiempo (hh:mm):</label>
+                  <input class="form-control" type="number" name="tiempoDedicado" #tiempoDedicado="ngModel" [(ngModel)]="oTicket.tiempoDedicado" />
+                </div> 
+            </div>  
 
-          <div class="input-group">
-              
-            </div>
+      </div>
+      <div class="form-group">
+            <label for="name">Resolución</label>
+            <textarea type="text" name="resolucion" #resolucion="ngModel" [(ngModel)]="oTicket.resolucion" class="form-control" wrap='off'
+              rows="5" cols="200"></textarea>
+          </div>
 
           <div class="form-group">
             <a class="btn btn-default" routerLink="/solicitudes-list">Cancelar</a>
-            <button type="submit" class="btn btn-primary">Guardar</button>
+            <button type="submit" class="btn btn-primary"  [disabled]="!formTicket.form.valid">Guardar</button>
           </div>
         </form>
       </div>
